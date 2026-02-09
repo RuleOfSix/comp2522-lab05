@@ -52,6 +52,54 @@ public final class Bookstore
 
     }
 
+    // Damon
+    public void printTitlesInAlphaOrder()
+    {
+
+    }
+
+    // June
+    public int printGroupByDecade(final int Decade)
+    {
+
+    }
+
+    // Damon
+    public String getLongest()
+    {
+
+    }
+
+    // June
+    public boolean isThereABookWrittenIn(final int year)
+    {
+
+    }
+
+    // Damon
+    public int howManyBooksContain(final String word)
+    {
+
+    }
+
+    // June
+    public double whichPercentWrittenBetween(final int firstYear, final int lastYear)
+    {
+
+    }
+
+    // Damon
+    public Novel getOldestBook()
+    {
+
+    }
+
+    // June
+    public List<Novel> getBooksThisLength(final int titleLength)
+    {
+
+    }
+
     /*
      * Validates the Bookstore's name. A store name is valid if it is not null or blank.
      *
