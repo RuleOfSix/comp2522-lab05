@@ -73,7 +73,8 @@ public final class Novel
      */
     private static void validateTitle(final String title)
     {
-        if (title == null || title.isBlank())
+        if (title == null ||
+            title.isBlank())
         {
             throw new IllegalArgumentException("Invalid title");
         }
@@ -101,7 +102,8 @@ public final class Novel
      */
     private static void validateAuthorName(final String authorName)
     {
-        if (authorName == null || authorName.isBlank())
+        if (authorName == null ||
+            authorName.isBlank())
         {
             throw new IllegalArgumentException("Invalid author name.");
         }
