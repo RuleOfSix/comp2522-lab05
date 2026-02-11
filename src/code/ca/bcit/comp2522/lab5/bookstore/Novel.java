@@ -4,10 +4,11 @@ package ca.bcit.comp2522.lab5.bookstore;
  * Represents a Novel in the bookstore.
  *
  * @author June Pyle
+ * @author Damon Cao
  *
  * @version 0.1
  */
-public final class Novel
+public final class Novel implements Comparable<Novel>
 {
     private static final int MIN_YEAR_PUBLISHED = -2100;
     private static final int MAX_YEAR_PUBLISHED = 2026;
@@ -64,6 +65,27 @@ public final class Novel
     public int getYearPublished()
     {
         return this.yearPublished;
+    }
+
+    /**
+     * Overrides Comparable's compareTo method, compares Novels based on title and calls String's
+     * compareToIgnoreCase to do it.
+     *
+     * @param otherNovel the Novel to be compared.
+     *
+     * @return int where
+     * - Positive integer means this is greater than otherNovel
+     * - Negative integer means this is less than otherNovel
+     * - 0 means this and otherNovel are equal
+     */
+    @Override
+    public int compareTo(final Novel otherNovel)
+    {
+        final String otherNovelTitle;
+
+        otherNovelTitle = otherNovel.getTitle();
+
+        return this.title.compareToIgnoreCase(otherNovelTitle);
     }
 
     /*

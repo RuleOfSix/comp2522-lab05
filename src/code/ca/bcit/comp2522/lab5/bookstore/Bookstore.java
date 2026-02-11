@@ -2,17 +2,21 @@ package ca.bcit.comp2522.lab5.bookstore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 /**
  * Represents the entire contents of the bookstore. A Bookstore holds Novels. Contains a main() method which
  * demonstrates the Bookstore's functionality.
  *
  * @author June Pyle
+ * @author Damon Cao
  *
  * @version 0.1
  */
 public final class Bookstore
 {
+    private static final int MIN_NUM_BOOKS_CONTAINING_WORD = 0;
+
     private final String storeName;
     private final List<Novel> inventory;
 
@@ -24,6 +28,7 @@ public final class Bookstore
     public Bookstore(final String storeName)
     {
         validateStoreName(storeName);
+
         this.storeName = storeName;
 
         this.inventory = new ArrayList<>();
@@ -52,9 +57,25 @@ public final class Bookstore
 
     }
 
-    // Damon
+    /**
+     * Prints all titles in alphabetical order using Collections.sort().
+     */
     public void printTitlesInAlphaOrder()
     {
+        final List<Novel> alphabeticalInventory;
+        alphabeticalInventory = new ArrayList<>();
+
+        alphabeticalInventory.addAll(this.inventory);
+
+        Collections.sort(alphabeticalInventory);
+
+        for (final Novel novel : alphabeticalInventory)
+        {
+            final String title;
+            title = novel.getTitle();
+
+            System.out.println(title);
+        }
 
     }
 
@@ -64,10 +85,31 @@ public final class Bookstore
 
     }
 
-    // Damon
+    /**
+     * Returns the longest title in the inventory.
+     *
+     * @return the String of the longest book title
+     */
     public String getLongest()
     {
+        String longestTitle;
+        longestTitle = this.inventory.getFirst().getTitle();
 
+        for (final Novel novel : this.inventory)
+        {
+            final int longestTitleLength;
+            final int novelTitleLength;
+
+            longestTitleLength = longestTitle.length();
+            novelTitleLength = novel.getTitle().length();
+
+            if (novelTitleLength > longestTitleLength)
+            {
+                longestTitle = novel.getTitle();
+            }
+        }
+
+        return longestTitle;
     }
 
     // June
@@ -76,10 +118,30 @@ public final class Bookstore
 
     }
 
-    // Damon
+    /**
+     * Returns the number of book titles containing a provided String word.
+     *
+     * @param word is the String that book titles contain
+     *
+     * @return int representing number of books containing word
+     */
     public int howManyBooksContain(final String word)
     {
+        int numBooksContainingWord;
+        numBooksContainingWord = MIN_NUM_BOOKS_CONTAINING_WORD;
 
+        for (final Novel novel : this.inventory)
+        {
+            final String novelTitle;
+            novelTitle = novel.getTitle();
+
+            if (novelTitle.contains(word))
+            {
+                numBooksContainingWord++;
+            }
+        }
+
+        return numBooksContainingWord;
     }
 
     // June
@@ -88,10 +150,31 @@ public final class Bookstore
 
     }
 
-    // Damon
+    /**
+     * Returns the oldest book in the inventory based on publishing year.
+     *
+     * @return Novel with oldest publishing year
+     */
     public Novel getOldestBook()
     {
+        Novel oldestNovel;
+        oldestNovel = this.inventory.getFirst();
 
+        for (final Novel novel : this.inventory)
+        {
+            final int oldestNovelPublishingYear;
+            final int novelPublishingYear;
+
+            oldestNovelPublishingYear = oldestNovel.getYearPublished();
+            novelPublishingYear = novel.getYearPublished();
+
+            if (novelPublishingYear > oldestNovelPublishingYear)
+            {
+                oldestNovel = novel;
+            }
+        }
+
+        return oldestNovel;
     }
 
     // June
