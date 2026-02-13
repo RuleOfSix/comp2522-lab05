@@ -16,6 +16,10 @@ import java.util.Collections;
 public final class Bookstore
 {
     private static final int MIN_NUM_BOOKS_CONTAINING_WORD = 0;
+    private static final int YEARS_PER_DECADE = 10;
+    private static final int YEARS_PER_CENTURY = 100;
+    private static final double NONE_PERCENTAGE = 0.0;
+    private static final double PERCENT_CONVERSION_FACTOR = 100.0;
 
     private final String storeName;
     private final List<Novel> inventory;
@@ -54,7 +58,21 @@ public final class Bookstore
      */
     public void printBookTitle(final String title)
     {
+        for (final Novel novel : this.inventory)
+        {
+            final String novelTitle;
+            final String novelTitleLower;
+            final String titleLower;
 
+            novelTitle = novel.getTitle();
+            novelTitleLower = novelTitle.toLowerCase();
+            titleLower = title.toLowerCase();
+
+            if (novelTitleLower.contains(titleLower))
+            {
+                System.out.println(novelTitle);
+            }
+        }
     }
 
     /**
@@ -79,9 +97,38 @@ public final class Bookstore
 
     }
 
-    // June
-    public int printGroupByDecade(final int Decade)
+    /**
+     * Prints the titles of all books in the bookstore that were printed in the given decade. A decade is
+     * considered to extend from the zeroth to ninth year; for example, books printed from 2000 to 2009, inclusive,
+     * are considered to have been printed in the 2000s.
+     *
+     * @param decade The decade of books to print, as an integer year. This value will be rounded down to the nearest
+     *               decade, so the function will consider the target decade to be the decade containing the input year.
+     */
+    public void printGroupByDecade(final int decade)
     {
+        final int decadeStart;
+        final int decadeEnd;
+
+        decadeStart = (decade / YEARS_PER_CENTURY) * YEARS_PER_CENTURY;
+        decadeEnd = decadeStart + YEARS_PER_DECADE;
+
+        for (final Novel novel : inventory)
+        {
+            final int yearPublished;
+            final String title;
+
+            yearPublished = novel.getYearPublished();
+
+            if (decadeStart <= yearPublished &&
+                decadeEnd > yearPublished)
+            {
+                title = novel.getTitle();
+
+                System.out.println(title);
+            }
+        }
+
 
     }
 
@@ -112,10 +159,28 @@ public final class Bookstore
         return longestTitle;
     }
 
-    // June
+    /**
+     * Determines whether the bookstore has a book written in the given year.
+     *
+     * @param year the year to find a book written in
+     *
+     * @return true if the bookstore has a book written that year, false otherwise.
+     */
     public boolean isThereABookWrittenIn(final int year)
     {
+        for (final Novel novel : this.inventory)
+        {
+            final int yearPublished;
 
+            yearPublished = novel.getYearPublished();
+
+            if (year == yearPublished)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -144,10 +209,42 @@ public final class Bookstore
         return numBooksContainingWord;
     }
 
-    // June
+    /**
+     * Determines what percentage of the bookstore's inventory was written between firstYear and lastYear,
+     * inclusive.
+     *
+     * @param firstYear The beginning year of the range.
+     * @param lastYear The final year of the range.
+     * @return The percentage (0 to 100) of the bookstore's inventory that was published within the given range of
+     *         years.
+     */
     public double whichPercentWrittenBetween(final int firstYear, final int lastYear)
     {
+        if (lastYear < firstYear)
+        {
+            return NONE_PERCENTAGE;
+        }
 
+        final int totalBooks;
+        int booksInRange;
+        totalBooks = this.inventory.size();
+        booksInRange = 0;
+
+        for (final Novel novel : this.inventory)
+        {
+            final int yearPublished;
+            yearPublished = novel.getYearPublished();
+            if (yearPublished >= firstYear &&
+                yearPublished <= lastYear)
+            {
+                booksInRange++;
+            }
+        }
+
+        final double ratio;
+        ratio = (double) booksInRange / totalBooks;
+
+        return ratio * PERCENT_CONVERSION_FACTOR;
     }
 
     /**
@@ -177,10 +274,34 @@ public final class Bookstore
         return oldestNovel;
     }
 
-    // June
+    /**
+     * Returns all books in the bookstore whose titles are of the given length.
+     *
+     * @param titleLength the length of titles to get books of
+     *
+     * @return a List of the novels the bookstore has that have titles of the given length
+     */
     public List<Novel> getBooksThisLength(final int titleLength)
     {
+        final List<Novel> novelsOfLength;
 
+        novelsOfLength = new ArrayList<>();
+
+        for (final Novel novel : this.inventory)
+        {
+            final String title;
+            final int currentTitleLength;
+
+            title = novel.getTitle();
+            currentTitleLength = title.length();
+
+            if (currentTitleLength == titleLength)
+            {
+                novelsOfLength.add(novel);
+            }
+        }
+
+        return novelsOfLength;
     }
 
     /*
