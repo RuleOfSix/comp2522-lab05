@@ -197,14 +197,17 @@ public final class Bookstore
     public int howManyBooksContain(final String word)
     {
         int numBooksContainingWord;
+        final String wordLowerCase;
+
         numBooksContainingWord = MIN_NUM_BOOKS_CONTAINING_WORD;
+        wordLowerCase = word.toLowerCase();
 
         for (final Novel novel : this.inventory)
         {
-            final String novelTitle;
-            novelTitle = novel.getTitle();
+            final String titleLowerCase;
+            titleLowerCase = novel.getTitle().toLowerCase();
 
-            if (novelTitle.contains(word))
+            if (titleLowerCase.contains(wordLowerCase))
             {
                 numBooksContainingWord++;
             }
@@ -453,7 +456,7 @@ public final class Bookstore
         System.out.println("\nIs there a book written in 1950?");
         System.out.println(bookstore.isThereABookWrittenIn(1950));
         System.out.println("\nHow many books contain 'Heart'?");
-        System.out.println(bookstore.howManyBooksContain("Heart"));
+        System.out.println(bookstore.howManyBooksContain("heart"));
         System.out.println("\nPercentage of books written between 1940 and 1950:");
         System.out.println(bookstore.whichPercentWrittenBetween(1940, 1950) + "%");
         System.out.println("\nOldest book:");
