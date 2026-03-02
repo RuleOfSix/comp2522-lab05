@@ -88,6 +88,21 @@ public final class Novel implements Comparable<Novel>
         return this.title.compareToIgnoreCase(otherNovelTitle);
     }
 
+    @Override
+    public String toString()
+    {
+        final StringBuilder toStringBuilder;
+        toStringBuilder = new StringBuilder();
+        toStringBuilder.append("Title: ");
+        toStringBuilder.append(this.title);
+        toStringBuilder.append("\tAuthor: ");
+        toStringBuilder.append(this.authorName);
+        toStringBuilder.append("\tPublished: ");
+        toStringBuilder.append(this.yearPublished);
+        toStringBuilder.append('\n');
+        return toStringBuilder.toString();
+    }
+
     /*
      * Validates a novel title. A title is valid if it is not null or blank.
      *

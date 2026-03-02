@@ -41,6 +41,11 @@ public final class Bookstore
         populateInventory();
     }
 
+    public List<Novel> getInventory()
+    {
+        return inventory;
+    }
+
     /**
      * Prints the title of every novel in the bookstore in all UPPERCASE.
      */
@@ -328,8 +333,8 @@ public final class Bookstore
         }
     }
 
-    /**
-     * Populates inventory.
+    /*
+     * Populates inventory with initial data.
      */
     private void populateInventory()
     {
