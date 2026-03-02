@@ -1,6 +1,12 @@
 package ca.bcit.comp2522.lab5.bookstore;
 
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Collections;
 
 /**
  * Represents a bookshop with an inventory of Novels.
@@ -10,6 +16,11 @@ import java.util.*;
  */
 public class Bookshop
 {
+    /**
+     * Creates a Map of Novels where their titles are the key, filled with the default inventory of a Bookstore.
+     * Prints out all titles, then removes all novels whose titles contain the word 'the', and then prints out all
+     * novel information in alphabetical order.
+     */
     public Bookshop()
     {
         final Map<String, Novel> inventoryMap;
@@ -24,7 +35,8 @@ public class Bookshop
         }
         titleSet = inventoryMap.keySet();
 
-        final Iterator<String> titleIterator = titleSet.iterator();
+        final Iterator<String> titleIterator;
+        titleIterator = titleSet.iterator();
         while (titleIterator.hasNext())
         {
             final String title;
